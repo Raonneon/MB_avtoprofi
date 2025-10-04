@@ -460,7 +460,7 @@ function App() {
       <StatsSection>
         <StatsGrid>
           <StatItem>
-            <h3>150+</h3>
+            <h3>50+</h3>
             <p>{t.stats.projects}</p>
           </StatItem>
           <StatItem>
@@ -468,11 +468,11 @@ function App() {
             <p>{t.stats.countries}</p>
           </StatItem>
           <StatItem>
-            <h3>20+</h3>
+            <h3>2+</h3>
             <p>{t.stats.experience}</p>
           </StatItem>
           <StatItem>
-            <h3>200+</h3>
+            <h3>70+</h3>
             <p>{t.stats.team}</p>
           </StatItem>
         </StatsGrid>
