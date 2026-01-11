@@ -359,6 +359,109 @@
             margin-bottom: 1rem;
             display: none;
         }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            overflow: auto;
+        }
+
+        .modal-content {
+            position: relative;
+            margin: 2rem auto;
+            max-width: 1000px;
+            width: 90%;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 2001;
+        }
+
+        .close-modal:hover {
+            color: #ff6b35;
+        }
+
+        .presentation-slide {
+            background: white;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .presentation-slide h2 {
+            color: #1e3c72;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .presentation-slide h3 {
+            color: #2a5298;
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+        }
+
+        .presentation-slide ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .presentation-slide ul li {
+            padding: 0.5rem 0 0.5rem 2rem;
+            position: relative;
+        }
+
+        .presentation-slide ul li:before {
+            content: "•";
+            color: #ff6b35;
+            font-weight: bold;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+        }
+
+        .slide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .slide-box {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #1e3c72;
+        }
+
+        .slide-box h4 {
+            color: #1e3c72;
+            margin-bottom: 0.5rem;
+        }
+
+        .clickable-card {
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .clickable-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
     </style>
 </head>
 <body>
@@ -434,7 +537,7 @@
                 <h3 data-translate="service2_title">Жилое строительство</h3>
                 <p data-translate="service2_desc">Строительство комфортабельных жилых домов и многоквартирных комплексов.</p>
             </div>
-            <div class="service-card">
+            <div class="service-card clickable-card" onclick="openPresentation()">
                 <div class="service-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
                         <rect x="2" y="7" width="20" height="14" rx="2"/>
@@ -443,6 +546,7 @@
                 </div>
                 <h3 data-translate="service3_title">Коммерческие объекты</h3>
                 <p data-translate="service3_desc">Возведение офисных зданий, торговых центров и бизнес-комплексов.</p>
+                <p style="color: #ff6b35; font-weight: bold; margin-top: 1rem; font-size: 0.9rem;">▶ Нажмите для просмотра презентации</p>
             </div>
             <div class="service-card">
                 <div class="service-icon">
@@ -543,6 +647,339 @@
     <footer>
         <p data-translate="footer_text">© 2026 MB Avtoprofi. Все права защищены.</p>
     </footer>
+
+    <!-- Модальное окно презентации -->
+    <div id="presentationModal" class="modal">
+        <span class="close-modal" onclick="closePresentation()">&times;</span>
+        <div class="modal-content">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <button class="lang-btn" style="font-size: 1.2rem; padding: 0.8rem 2rem;" onclick="showPresentationLang('ru')">Русский</button>
+                <button class="lang-btn" style="font-size: 1.2rem; padding: 0.8rem 2rem; margin-left: 1rem;" onclick="showPresentationLang('lt')">Lietuvių</button>
+            </div>
+
+            <!-- Русская версия -->
+            <div id="presentation-ru" class="presentation-version">
+                <!-- Слайд 1 -->
+                <div class="presentation-slide">
+                    <h2>Фасадные работы, гипсокартонные работы и бетонные работы</h2>
+                    <p style="text-align: center; color: #666; font-size: 1.2rem; margin-top: 1rem;">MB BALTIC STROY GROUP IT</p>
+                </div>
+
+                <!-- Слайд 2 -->
+                <div class="presentation-slide">
+                    <h3>Современное строительство</h3>
+                    <p>Современное строительство включает разные виды работ. Важную роль играют:</p>
+                    <ul>
+                        <li>Фасадные работы</li>
+                        <li>Монтаж гипсокартона</li>
+                        <li>Бетонирование</li>
+                    </ul>
+                    <p style="margin-top: 1.5rem;"><strong>Эти технологии обеспечивают прочность, внешний вид и комфорт зданий</strong></p>
+                </div>
+
+                <!-- Слайд 3 -->
+                <div class="presentation-slide">
+                    <h3>Фасадные работы</h3>
+                    <p><strong>Работы по наружной части здания</strong></p>
+                    <p>Защищают здание от:</p>
+                    <ul>
+                        <li>Холода</li>
+                        <li>Влаги</li>
+                        <li>Ветра</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Улучшают внешний вид сооружения</strong></p>
+                </div>
+
+                <!-- Слайд 4 -->
+                <div class="presentation-slide">
+                    <h3>Виды фасадных работ</h3>
+                    <div class="slide-grid">
+                        <div class="slide-box">
+                            <h4>Утепление фасадов</h4>
+                        </div>
+                        <div class="slide-box">
+                            <h4>Облицовка</h4>
+                            <p>штукатурка, панели, плитка</p>
+                        </div>
+                        <div class="slide-box">
+                            <h4>Покраска фасада</h4>
+                        </div>
+                        <div class="slide-box">
+                            <h4>Монтаж вентилируемых фасадов</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Слайд 5 -->
+                <div class="presentation-slide">
+                    <h3>Современные технологии</h3>
+                    <p><strong>Использование строительных люлек и подъемников</strong></p>
+                    <p>Автоматизированные системы и роботы:</p>
+                    <ul>
+                        <li>Для мойки фасадов</li>
+                        <li>Для покраски</li>
+                    </ul>
+                    <p style="margin-top: 1.5rem;"><strong>Повышают:</strong></p>
+                    <ul>
+                        <li>Безопасность</li>
+                        <li>Скорость работ</li>
+                        <li>Качество</li>
+                    </ul>
+                </div>
+
+                <!-- Слайд 6 -->
+                <div class="presentation-slide">
+                    <h3>Гипсокартон</h3>
+                    <p><strong>Строительный материал из гипса и картона</strong></p>
+                    <ul>
+                        <li>Используется внутри помещений</li>
+                        <li>Легкий и удобный в монтаже</li>
+                    </ul>
+                </div>
+
+                <!-- Слайд 7 -->
+                <div class="presentation-slide">
+                    <h3>Применение гипсокартона</h3>
+                    <div class="slide-grid">
+                        <div class="slide-box">
+                            <h4>Выравнивание стен и потолков</h4>
+                        </div>
+                        <div class="slide-box">
+                            <h4>Создание перегородок</h4>
+                        </div>
+                        <div class="slide-box">
+                            <h4>Многоуровневые потолки</h4>
+                        </div>
+                        <div class="slide-box">
+                            <h4>Декоративные элементы</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Слайд 8 -->
+                <div class="presentation-slide">
+                    <h3>Преимущества гипсокартона</h3>
+                    <ul>
+                        <li>Быстрый монтаж</li>
+                        <li>Ровная поверхность</li>
+                        <li>Экологичность</li>
+                        <li>Возможность скрыть провода и коммуникации</li>
+                    </ul>
+                </div>
+
+                <!-- Слайд 9 -->
+                <div class="presentation-slide">
+                    <h3>Бетонирование</h3>
+                    <p><strong>Процесс заливки бетонной смеси</strong></p>
+                    <ul>
+                        <li>Основа для прочных конструкций</li>
+                        <li>Используется на всех этапах строительства</li>
+                    </ul>
+                </div>
+
+                <!-- Слайд 10 -->
+                <div class="presentation-slide">
+                    <h3>Виды бетонных работ</h3>
+                    <div class="slide-grid">
+                        <div class="slide-box">
+                            <h4>Фундаменты</h4>
+                        </div>
+                        <div class="slide-box">
+                            <h4>Плиты перекрытия</h4>
+                        </div>
+                        <div class="slide-box">
+                            <h4>Колонны и стены</h4>
+                        </div>
+                        <div class="slide-box">
+                            <h4>Полы и лестницы</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Слайд 11 -->
+                <div class="presentation-slide">
+                    <h3>Значение бетонирования</h3>
+                    <ul>
+                        <li>Обеспечивает прочность здания</li>
+                        <li>Долговечность конструкций</li>
+                        <li>Устойчивость к нагрузкам</li>
+                    </ul>
+                </div>
+
+                <!-- Слайд 12 -->
+                <div class="presentation-slide">
+                    <h3>Заключение</h3>
+                    <ul>
+                        <li>Фасадные работы защищают и украшают здания</li>
+                        <li>Гипсокартон облегчает внутреннюю отделку</li>
+                        <li>Бетонирование — основа любого строительства</li>
+                        <li><strong>Все виды работ важны и взаимосвязаны</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Литовская версия -->
+            <div id="presentation-lt" class="presentation-version" style="display: none;">
+                <!-- Слайд 1 -->
+                <div class="presentation-slide">
+                    <h2>Fasadų darbai, gipso kartono darbai ir betonavimo darbai</h2>
+                    <p style="text-align: center; color: #666; font-size: 1.2rem; margin-top: 1rem;">MB BALTIC STROY GROUP IT</p>
+                </div>
+
+                <!-- Слайд 2 -->
+                <div class="presentation-slide">
+                    <h3>Šiuolaikinė statyba</h3>
+                    <p>Šiuolaikinė statyba apima įvairių rūšių darbus. Ypač svarbūs yra:</p>
+                    <ul>
+                        <li>Fasadų darbai</li>
+                        <li>Gipso kartono montavimas</li>
+                        <li>Betonavimas</li>
+                    </ul>
+                    <p style="margin-top: 1.5rem;"><strong>Šios technologijos užtikrina pastatų tvirtumą, estetinę išvaizdą ir komfortą</strong></p>
+                </div>
+
+                <!-- Слайд 3 -->
+                <div class="presentation-slide">
+                    <h3>Fasadų darbai</h3>
+                    <p><strong>Pastato išorinės dalies darbai</strong></p>
+                    <p>Apsaugo pastatą nuo:</p>
+                    <ul>
+                        <li>Šalčio</li>
+                        <li>Drėgmės</li>
+                        <li>Vėjo</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Pagerina statinio išvaizdą</strong></p>
+                </div>
+
+                <!-- Слайд 4 -->
+                <div class="presentation-slide">
+                    <h3>Fasadų darbų rūšys</h3>
+                    <div class="slide-grid">
+                        <div class="slide-box">
+                            <h4>Fasadų šiltinimas</h4>
+                        </div>
+                        <div class="slide-box">
+                            <h4>Apdaila</h4>
+                            <p>tinkas, plokštės, plytelės</p>
+                        </div>
+                        <div class="slide-box">
+                            <h4>Fasado dažymas</h4>
+                        </div>
+                        <div class="slide-box">
+                            <h4>Vėdinamų fasadų montavimas</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Слайд 5 -->
+                <div class="presentation-slide">
+                    <h3>Šiuolaikinės technologijos</h3>
+                    <p><strong>Statybinių lopšių ir keltuvų naudojimas</strong></p>
+                    <p>Automatizuotos sistemos ir robotai:</p>
+                    <ul>
+                        <li>Fasadų plovimui</li>
+                        <li>Dažymui</li>
+                    </ul>
+                    <p style="margin-top: 1.5rem;"><strong>Didina:</strong></p>
+                    <ul>
+                        <li>Saugumą</li>
+                        <li>Darbo greitį</li>
+                        <li>Kokybę</li>
+                    </ul>
+                </div>
+
+                <!-- Слайд 6 -->
+                <div class="presentation-slide">
+                    <h3>Gipso kartonas</h3>
+                    <p><strong>Statybinė medžiaga iš gipso ir kartono</strong></p>
+                    <ul>
+                        <li>Naudojama vidaus patalpose</li>
+                        <li>Lengva ir patogi montuoti</li>
+                    </ul>
+                </div>
+
+                <!-- Слайд 7 -->
+                <div class="presentation-slide">
+                    <h3>Gipso kartono panaudojimas</h3>
+                    <div class="slide-grid">
+                        <div class="slide-box">
+                            <h4>Sienų ir lubų lyginimas</h4>
+                        </div>
+                        <div class="slide-box">
+                            <h4>Pertvarų įrengimas</h4>
+                        </div>
+                        <div class="slide-box">
+                            <h4>Daugiapakopės lubos</h4>
+                        </div>
+                        <div class="slide-box">
+                            <h4>Dekoratyviniai elementai</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Слайд 8 -->
+                <div class="presentation-slide">
+                    <h3>Gipso kartono privalumai</h3>
+                    <ul>
+                        <li>Greitas montavimas</li>
+                        <li>Lygus paviršius</li>
+                        <li>Ekologiškumas</li>
+                        <li>Galimybė paslėpti laidus ir komunikacijas</li>
+                    </ul>
+                </div>
+
+                <!-- Слайд 9 -->
+                <div class="presentation-slide">
+                    <h3>Betonavimas</h3>
+                    <p><strong>Betono mišinio liejimo procesas</strong></p>
+                    <ul>
+                        <li>Pagrindas tvirtoms konstrukcijoms</li>
+                        <li>Naudojamas visuose statybos etapuose</li>
+                    </ul>
+                </div>
+
+                <!-- Слайд 10 -->
+                <div class="presentation-slide">
+                    <h3>Betonavimo darbų rūšys</h3>
+                    <div class="slide-grid">
+                        <div class="slide-box">
+                            <h4>Pamatai</h4>
+                        </div>
+                        <div class="slide-box">
+                            <h4>Perdangos plokštės</h4>
+                        </div>
+                        <div class="slide-box">
+                            <h4>Kolonos ir sienos</h4>
+                        </div>
+                        <div class="slide-box">
+                            <h4>Grindys ir laiptai</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Слайд 11 -->
+                <div class="presentation-slide">
+                    <h3>Betonavimo reikšmė</h3>
+                    <ul>
+                        <li>Užtikrina pastato tvirtumą</li>
+                        <li>Konstrukcijų ilgaamžiškumas</li>
+                        <li>Atsparumas apkrovoms</li>
+                    </ul>
+                </div>
+
+                <!-- Слайд 12 -->
+                <div class="presentation-slide">
+                    <h3>Išvada</h3>
+                    <ul>
+                        <li>Fasadų darbai saugo ir puošia pastatus</li>
+                        <li>Gipso kartonas palengvina vidaus apdailą</li>
+                        <li>Betonavimas – bet kurios statybos pagrindas</li>
+                        <li><strong>Visi darbų tipai yra svarbūs ir tarpusavyje susiję</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         const translations = {
@@ -646,9 +1083,9 @@
                 stat_experience: "Metų patirtis",
                 stat_specialists: "Specialistų",
                 about_title: "Apie įmonę",
-                about_text1: "Įmonės \"Avtoprofi\" ir \"Baltic Stroy Grop\" - modernios statybos įmonės, kurios specializuojasi gyvenamųjų, komercinių ir pramoninių objektų statyboje.",
+                about_text1: "Įmonės \"Avtoprofi\" ir \"Baltic Stroy Grop\" – modernios statybos įmonės, kurios specializuojasi gyvenamųjų, komercinių ir pramoninių objektų statyboje.",
                 about_text2: "Rinkoje dirbame jau daugiau nei 5 metus ir sėkmingai įgyvendinome daugiau nei 100 projektų visoje Lietuvoje.",
-                about_text3: "Mūsų tikslas - kurti aukštos kokybės, saugius ir energiją taupančius objektus patogiam gyvenimui ir verslui.",
+                about_text3: "Mūsų tikslas – kurti aukštos kokybės, saugius ir energiją taupančius objektus patogiam gyvenimui ir verslui.",
                 services_title: "Mūsų paslaugos",
                 service1_title: "Tiltų statyba",
                 service1_desc: "Šiuolaikinių tiltų konstrukcijų projektavimas ir statyba naudojant pažangias technologijas.",
@@ -681,6 +1118,31 @@
         };
 
         let currentLang = 'ru';
+        let currentPresentationLang = 'ru';
+
+        function openPresentation() {
+            document.getElementById('presentationModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            showPresentationLang('ru');
+        }
+
+        function closePresentation() {
+            document.getElementById('presentationModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function showPresentationLang(lang) {
+            currentPresentationLang = lang;
+            document.getElementById('presentation-ru').style.display = lang === 'ru' ? 'block' : 'none';
+            document.getElementById('presentation-lt').style.display = lang === 'lt' ? 'block' : 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('presentationModal');
+            if (event.target === modal) {
+                closePresentation();
+            }
+        }
 
         function translatePage(lang) {
             currentLang = lang;
